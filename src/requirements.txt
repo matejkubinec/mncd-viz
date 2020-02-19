@@ -1,0 +1,10 @@
+Flask
+py3plex
+matplotlib
+pandas
+RDFlib
+Cython
+Numpy
+tqdm
+fs
+autopep8
