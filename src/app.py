@@ -10,6 +10,10 @@ def hello():
 
 @app.route("/diagonal")
 def diagonal_layout():
+
+    if request.data is None or request.data == "":
+        return Response("Data is required.")
+
     edgelist = request.data.decode("utf-8")
     svg = diagonal(edgelist)
     return Response(svg, mimetype="image/svg+xml")
