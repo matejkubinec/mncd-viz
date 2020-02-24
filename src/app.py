@@ -8,7 +8,7 @@ def hello():
     return "Welcome to MNCD.Viz application!"
 
 
-@app.route("/diagonal")
+@app.route("/multilayer/diagonal", methods=["POST"])
 def diagonal_layout():
 
     if request.data is None or request.data == "":
