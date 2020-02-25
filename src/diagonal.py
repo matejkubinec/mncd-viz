@@ -15,20 +15,3 @@ def diagonal(edgelist):
     network.visualize_network(parameters_multiedges={"alphachannel": 0.5})
 
     return plt_to_str(plt)
-
-
-def diagonal_communities(edgelist, community_list):
-    network = build_network(edgelist)
-    actor_to_community, communities = build_communities(community_list)
-
-    c_count = len(communities)
-    color_mappings = dict((com, col) for col, com in zip(
-        colors_default[:c_count], communities))
-
-    colors = [color_mappings[actor_to_community[a]]
-              for a, _ in network.get_nodes()]
-    plt.cla()
-
-    network.visualize_network(parameters_multiedges={"alphachannel": 0.5})
-
-    return plt_to_str(plt)
