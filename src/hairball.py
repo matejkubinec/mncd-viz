@@ -19,6 +19,8 @@ def hairball_communities(edgelist, communities_list):
     colors = [color_mappings[actor_to_community[a]]
               for a, _ in network.get_nodes()]
 
+    plt.cla()
+
     hairball_plot(network.core_network,
                   color_list=colors,
                   scale_by_size=True,
