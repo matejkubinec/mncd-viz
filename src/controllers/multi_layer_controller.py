@@ -17,13 +17,16 @@ def draw_diagonal():
     valid = True
     errors = list()
 
-    if "edge_list" not in data:
-        valid = False
-        errors.append("Parameter 'edge_list' must not be none.")
+    params = ["edge_list"]
+    for param in params:
+
+        if param not in data:
+            valid = False
+            errors.append(f"Parameter '{param}' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
     edge_list = data["edge_list"]
 
@@ -42,17 +45,16 @@ def draw_hairball():
     valid = True
     errors = list()
 
-    if "edge_list" not in data:
-        valid = False
-        errors.append("Parameter 'edge_list' must not be none.")
+    params = ["edge_list", "community_list"]
+    for param in params:
 
-    if "community_list" not in data:
-        valid = False
-        errors.append("Parameter 'community_list' must not be none.")
+        if param not in data:
+            valid = False
+            errors.append(f"Parameter '{param}' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
     edge_list = data["edge_list"]
     community_list = data["community_list"]

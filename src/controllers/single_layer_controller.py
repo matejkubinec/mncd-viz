@@ -14,24 +14,19 @@ def draw_network():
         return Response(jsonify(response), status=402)
 
     data = json.loads(request.data.decode("utf-8"))
+    params = ["edge_list", "layout"]
     valid = True
     errors = list()
 
-    if "edge_list" not in data:
-        valid = False
-        errors.append("Parameter 'edge_list' must not be none.")
+    for param in params:
 
-    if "layout" not in data:
-        valid = False
-        errors.append("Parameter 'layout' must not be none.")
+        if param not in data:
+            valid = False
+            errors.append("Parameter 'edge_list' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
-
-    if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=405)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
     layout = data["layout"]
     edge_list = data["edge_list"]
@@ -58,21 +53,16 @@ def draw_communities():
     valid = True
     errors = list()
 
-    if "edge_list" not in data:
-        valid = False
-        errors.append("Parameter 'edge_list' must not be none.")
+    params = ["edge_list", "comunity_list", "layout"]
+    for param in params:
 
-    if "community_list" not in data:
-        valid = False
-        errors.append("Parameter 'community_list' must not be none.")
-
-    if "layout" not in data:
-        valid = False
-        errors.append("Parameter 'layout' must not be none.")
+        if param not in data:
+            valid = False
+            errors.append(f"Parameter '{param}' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
     layout = data["layout"]
     edge_list = data["edge_list"]

@@ -16,8 +16,8 @@ def barplot():
     valid = True
     errors = list()
     data = json.loads(request.data.decode("utf-8"))
-    params = ["X", "Y", "labels", "xlabel", "ylabel"]
 
+    params = ["x", "y", "labels", "xlabel", "ylabel"]
     for param in params:
 
         if param not in data:
@@ -25,11 +25,11 @@ def barplot():
             errors.append(f"Parameter '{param}' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
-    X = data["X"]
-    Y = data["Y"]
+    X = data["x"]
+    Y = data["y"]
     labels = data["labels"]
     xlabel = data["xlabel"]
     ylabel = data["ylabel"]
@@ -48,8 +48,8 @@ def treemap():
     valid = True
     errors = list()
     data = json.loads(request.data.decode("utf-8"))
-    params = ["sizes", "label"]
 
+    params = ["sizes", "label"]
     for param in params:
 
         if param not in data:
@@ -57,8 +57,8 @@ def treemap():
             errors.append(f"Parameter '{param}' must not be none.")
 
     if not valid:
-        response = {"errors": errors}
-        return Response(jsonify(response), status=400)
+        response = json.dumps({"errors": errors})
+        return Response(response, status=400)
 
     sizes = data["sizes"]
     label = data["label"]
