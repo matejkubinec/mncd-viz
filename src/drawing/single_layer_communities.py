@@ -21,7 +21,7 @@ def spring_layout_communities(edge_list, community_list):
 
 
 def circular_layout_communities(edge_list, community_list):
-    G = build_network_single_layer(edgelist)
+    G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
     plt.cla()
     nx.draw(
@@ -35,7 +35,7 @@ def circular_layout_communities(edge_list, community_list):
 
 
 def spiral_layout_communities(edge_list, community_list):
-    G = build_network_single_layer(edgelist)
+    G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
     plt.cla()
     nx.draw(

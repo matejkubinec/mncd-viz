@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 
-def spring_layout(edgelist):
-    G = build_network_single_layer(edgelist)
+def spring_layout(edge_list):
+    G = build_network_single_layer(edge_list)
     plt.cla()
     nx.draw(
         G,
@@ -18,8 +18,8 @@ def spring_layout(edgelist):
     return plt_to_str(plt)
 
 
-def circular_layout(edgelist):
-    G = build_network_single_layer(edgelist)
+def circular_layout(edge_list):
+    G = build_network_single_layer(edge_list)
     plt.cla()
     nx.draw(
         G,
@@ -31,8 +31,8 @@ def circular_layout(edgelist):
     return plt_to_str(plt)
 
 
-def spiral_layout(edgelist):
-    G = build_network_single_layer(edgelist)
+def spiral_layout(edge_list):
+    G = build_network_single_layer(edge_list)
     plt.cla()
     nx.draw(
         G,
