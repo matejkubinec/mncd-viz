@@ -1,4 +1,4 @@
-def build_communities(community_list: str):
+def build_communities(community_list: str) -> dict:
     rows = [row.split(" ") for row in community_list.splitlines()]
 
     actor_to_community = dict()

@@ -9,11 +9,17 @@
             font-family: sans-serif;
         }
 
-        h1, h2, h3, h4, h5, b {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        b {
             font-family: serif;
         }
 
-        code, pre {
+        code,
+        pre {
             font-family: monospace;
         }
 
@@ -44,8 +50,9 @@
         }
 
         .route .route-body-example pre {
-            background-color: rgba(0, 0, 0, 0.025);
-            padding: 5px;
+            border-radius: 4px;
+            background-color: rgb(0, 132, 255, 0.25);
+            padding: 15px;
         }
     </style>
     <title>🎨️MNCD.Viz</title>
@@ -56,7 +63,6 @@
         Welcome to 🎨️MNCD.Viz application!
     </h1>
     <div>
-        <h2>Routes</h2>
         <div>
             <h3>Single Layer</h3>
             <hr>
@@ -82,10 +88,10 @@
                 </div>
                 <div class="route-body-example">
                     <pre>
-                        {
-                            "edge_list": "0 1\n0 2\n2 1",
-                            "layout": "spring"
-                        }</pre>
+{
+    "edge_list": "0 1\n0 2\n2 1",
+    "layout": "spring"
+}</pre>
                 </div>
                 <img src="/img/single-layer-network.svg" alt="">
             </div>
@@ -118,11 +124,11 @@
                 </div>
                 <div class="route-body-example">
                     <pre>
-                        {
-                            "edge_list": "0 1\n0 2\n1 2",
-                            "community_list": "0 1\n1 2\n2 2",
-                            "layout": "spring"
-                        }</pre>
+{
+    "edge_list": "0 1\n0 2\n1 2",
+    "community_list": "0 1\n1 2\n2 2",
+    "layout": "spring"
+}</pre>
                 </div>
                 <img src="/img/single-layer-community.svg" alt="">
             </div>
@@ -145,9 +151,9 @@
                 </div>
                 <div class="route-body-example">
                     <pre>
-                        {
-                            "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3"
-                        }</pre>
+{
+    "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3"
+}</pre>
                 </div>
                 <img src="/img/multi-layer-diagonal.svg" alt="">
             </div>
@@ -174,12 +180,87 @@
                 </div>
                 <div class="route-body-example">
                     <pre>
-                        {
-                            "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3",
-                            "community_list": "0 1\n1 2\n2 2"
-                        }</pre>
+{
+    "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3",
+    "community_list": "0 1\n1 2\n2 2"
+}</pre>
                 </div>
                 <img src="/img/multi-layer-hairball.svg" alt="">
+            </div>
+            <h3>Common Charts</h3>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/common-charts/barplot</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>X</b> - categories
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>Y</b> - values
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>labels</b> - X item labels
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>xlabel</b> - label for x axis
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>ylxabel</b> - label for y axis
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+{
+    "X": [1, 2, 3],
+    "Y": [1, 2, 3],
+    "labels": [1, 2, 3],
+    "xlabel": "X Data",
+    "ylabel": "Y Data"
+}</pre>
+                </div>
+                <img src="/img/common-charts-barplot.svg" alt="">
+            </div>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/common-charts/barplot</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>sizes</b> - sizes of items
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>labels</b> - labels for items
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+{
+    "sizes": [1, 2, 3],
+    "label": ["a", "b", "c"]
+}</pre>
+                </div>
+                <img src="/img/common-charts-treemap.svg" alt="">
             </div>
         </div>
 </body>

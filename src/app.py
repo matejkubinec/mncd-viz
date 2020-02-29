@@ -1,11 +1,13 @@
 from flask import Flask, request, Response, send_from_directory
 from controllers.single_layer_controller import single_layer
 from controllers.multi_layer_controller import multi_layer
+from controllers.common_charts_controller import common_charts
 import json
 
 app = Flask(__name__)
 app.register_blueprint(single_layer)
 app.register_blueprint(multi_layer)
+app.register_blueprint(common_charts)
 
 
 @app.route("/")

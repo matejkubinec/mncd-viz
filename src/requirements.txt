@@ -8,3 +8,5 @@ Numpy
 tqdm
 fs
 autopep8
+squarify
+requests
