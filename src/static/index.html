@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, b {
+            font-family: serif;
+        }
+
+        code, pre {
+            font-family: monospace;
+        }
+
+        h3 {
+            padding-top: 2em;
+        }
+
+        .route {
+            padding-left: 1em;
+            padding-bottom: 1em;
+        }
+
+        .route .route-body-content {
+            padding-left: 1em;
+        }
+
+        .route .route-body-content .router-body-item {
+            padding: 0.5em 0;
+        }
+
+        .route .route-body-content .router-body-item code {
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        .route .route-body-content .route-body-item-example {
+            padding-left: 1em;
+        }
+
+        .route .route-body-example pre {
+            background-color: rgba(0, 0, 0, 0.025);
+            padding: 5px;
+        }
+    </style>
+    <title>🎨️MNCD.Viz</title>
+</head>
+
+<body>
+    <h1>
+        Welcome to 🎨️MNCD.Viz application!
+    </h1>
+    <div>
+        <h2>Routes</h2>
+        <div>
+            <h3>Single Layer</h3>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/single-layer/network</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>edge_list</b> - edge list of network in format:
+                            <code>from to</code>
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>layout</b> - one of following:
+                            <code>spring | circular | spiral</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+                        {
+                            "edge_list": "0 1\n0 2\n2 1",
+                            "layout": "spring"
+                        }</pre>
+                </div>
+                <img src="/img/single-layer-network.svg" alt="">
+            </div>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/single-layer/community</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>edge_list</b> - edge list of network in format:
+                            <code>from to</code>
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>community_list</b> - edge list of network in format:
+                            <code>actor community</code>
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>layout</b> - one of following:
+                            <code>spring | circular | spiral</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+                        {
+                            "edge_list": "0 1\n0 2\n1 2",
+                            "community_list": "0 1\n1 2\n2 2",
+                            "layout": "spring"
+                        }</pre>
+                </div>
+                <img src="/img/single-layer-community.svg" alt="">
+            </div>
+            <hr>
+            <h3>Multi Layer</h3>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/multi-layer/diagonal</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>edge_list</b> - edge list of network in format:
+                            <code>from layerFrom to layerTo weight</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+                        {
+                            "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3"
+                        }</pre>
+                </div>
+                <img src="/img/multi-layer-diagonal.svg" alt="">
+            </div>
+            <hr>
+            <div class="route">
+                <div class="route-method"><b>POST:</b> /api/multi-layer/hairball</div>
+                <div class="route-body"><b>BODY</b> (JSON): </div>
+                <div class="route-body-content">
+                    <div class="router-body-item">
+                        <div>
+                            <b>edge_list</b> - edge list of network in format:
+                            <code>from layerFrom to layerTo weight</code>
+                        </div>
+                    </div>
+                    <div class="router-body-item">
+                        <div>
+                            <b>community_list</b> - edge list of network in format:
+                            <code>actor community</code>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <b>Example:</b>
+                </div>
+                <div class="route-body-example">
+                    <pre>
+                        {
+                            "edge_list": "0 l1 1 l1 1\n0 l2 2 l2 2\n1 l1 2 l2 3",
+                            "community_list": "0 1\n1 2\n2 2"
+                        }</pre>
+                </div>
+                <img src="/img/multi-layer-hairball.svg" alt="">
+            </div>
+        </div>
+</body>
+
+</html>
