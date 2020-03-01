@@ -17,7 +17,15 @@ def build_network_single_layer(edgelist):
     G = nx.Graph()
 
     lines = edgelist.splitlines()
-    edges = [tuple(line.split(" ")) for line in lines]
+    edges = []
+
+    for line in lines:
+        values = line.split(" ")
+
+        if len(values) == 3:
+            edges.append(tuple(values))
+        else:
+            edges.append(tuple([values[0], values[2]]))
 
     G.add_edges_from(edges)
 

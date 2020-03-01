@@ -53,7 +53,7 @@ def draw_communities():
     valid = True
     errors = list()
 
-    params = ["edge_list", "comunity_list", "layout"]
+    params = ["edge_list", "community_list", "layout"]
     for param in params:
 
         if param not in data:

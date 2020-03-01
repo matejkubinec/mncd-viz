@@ -24,12 +24,13 @@ def circular_layout_communities(edge_list, community_list):
     G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
     plt.cla()
+    node_count = G.number_of_nodes()
     nx.draw(
         G,
         pos=nx.circular_layout(G),
         edge_color=edge_color,
         node_size=_get_node_size(G),
-        node_color=_get_node_color(ATC)
+        node_color=_get_node_color(ATC)[:node_count]
     )
     return plt_to_str(plt)
 

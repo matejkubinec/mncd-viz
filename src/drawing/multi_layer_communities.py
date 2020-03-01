@@ -14,8 +14,13 @@ def hairball_layout(edge_list, community_list):
     color_mappings = dict((com, col) for col, com in zip(
         colors_default[:c_count], communities))
 
-    colors = [color_mappings[actor_to_community[a]]
-              for a, _ in network.get_nodes()]
+    colors = []
+    for a, _ in network.get_nodes():
+
+        if a in actor_to_community:
+            colors.append(color_mappings[actor_to_community[a]])
+        else:
+            colors.append("black")
 
     plt.cla()
     hairball_plot(
