@@ -8,6 +8,11 @@ common_charts = Blueprint("common_charts", __name__)
 
 @common_charts.route("/api/common-charts/barplot", methods=["POST"])
 def barplot():
+    """
+    Create barplot
+
+    swagger_from_file: specs/common_charts/barplot.yml
+    """
 
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
@@ -33,13 +38,26 @@ def barplot():
     labels = data["labels"]
     xlabel = data["xlabel"]
     ylabel = data["ylabel"]
+    image_format = "svg"
 
-    svg = draw_barplot(X, Y, labels, xlabel, ylabel)
-    return Response(svg, mimetype="image/svg+xml")
+    if "image_format" in data:
+        image_format = data["image_format"]
+
+    img_data = draw_barplot(X, Y, labels, xlabel, ylabel, image_format)
+
+    if image_format == "svg":
+        return Response(img_data, mimetype="image/svg+xml")
+    else:
+        return Response(img_data, mimetype="image/png")
 
 
 @common_charts.route("/api/common-charts/treemap", methods=["POST"])
 def treemap():
+    """
+    Create treemap
+
+    swagger_from_file: specs/common_charts/treemap.yml
+    """
 
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
@@ -62,6 +80,14 @@ def treemap():
 
     sizes = data["sizes"]
     label = data["label"]
+    image_format = "svg"
 
-    svg = draw_treemap(sizes, label)
-    return Response(svg, mimetype="image/svg+xml")
+    if "image_format" in data:
+        image_format = data["image_format"]
+
+    image_data = draw_treemap(sizes, label, image_format)
+
+    if image_format == "svg":
+        return Response(image_data, mimetype="image/svg+xml")
+    else:
+        return Response(image_data, mimetype="image/png")
