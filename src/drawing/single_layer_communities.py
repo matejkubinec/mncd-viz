@@ -2,28 +2,35 @@ from networkx.readwrite.edgelist import read_edgelist
 from converters.build_communities import build_communities
 from converters.build_network import build_network_single_layer
 from converters.plt_to_str import plt_to_str
+from converters.plt_to_png import plt_to_png
 from drawing.drawing_constants import edge_color, node_color
 import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def spring_layout_communities(edge_list, community_list):
+def spring_layout_communities(edge_list, community_list, image_format):
     G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
-    plt.cla()
+
+    fig, ax = plt.subplots()
+
     nx.draw(
         G,
         edge_color=edge_color,
         node_size=_get_node_size(G),
         node_color=_get_node_color(ATC)
     )
-    return plt_to_str(plt)
+
+    if image_format == "svg":
+        return plt_to_str(fig)
+    else:
+        return plt_to_png(fig)
 
 
-def circular_layout_communities(edge_list, community_list):
+def circular_layout_communities(edge_list, community_list, image_format):
     G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
-    plt.cla()
+    fig, ax = plt.subplots()
     node_count = G.number_of_nodes()
     nx.draw(
         G,
@@ -32,13 +39,17 @@ def circular_layout_communities(edge_list, community_list):
         node_size=_get_node_size(G),
         node_color=_get_node_color(ATC)[:node_count]
     )
-    return plt_to_str(plt)
+
+    if image_format == "svg":
+        return plt_to_str(fig)
+    else:
+        return plt_to_png(fig)
 
 
-def spiral_layout_communities(edge_list, community_list):
+def spiral_layout_communities(edge_list, community_list, image_format):
     G = build_network_single_layer(edge_list)
     ATC, C = build_communities(community_list)
-    plt.cla()
+    fig, ax = plt.subplots()
     nx.draw(
         G,
         pos=nx.spiral_layout(G),
@@ -46,7 +57,11 @@ def spiral_layout_communities(edge_list, community_list):
         node_size=_get_node_size(G),
         node_color=_get_node_color(ATC)
     )
-    return plt_to_str(plt)
+
+    if image_format == "svg":
+        return plt_to_str(fig)
+    else:
+        return plt_to_png(fig)
 
 
 def _get_node_size(G):
