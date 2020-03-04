@@ -1,7 +1,7 @@
 import unittest
-from test import EdgeListParserTests
+import tests as ts
 
-suite = unittest.TestLoader().loadTestsFromTestCase(EdgeListParserTests)
+suite = unittest.TestLoader().loadTestsFromModule(ts)
 unittest.TextTestRunner(verbosity=2).run(suite)
 
 # import requests
