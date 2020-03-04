@@ -10,3 +10,4 @@ fs
 autopep8
 squarify
 requests
+flask-swagger

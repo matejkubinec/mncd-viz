@@ -8,6 +8,11 @@ single_layer = Blueprint("single_user", __name__)
 
 @single_layer.route("/api/single-layer/network", methods=["POST"])
 def draw_network():
+    """
+    Single Layer Network
+
+    swagger_from_file: specs/single_layer/network.yml
+    """
 
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
@@ -30,20 +35,32 @@ def draw_network():
 
     layout = data["layout"]
     edge_list = data["edge_list"]
-    svg = None
+    image_format = "svg"
 
+    if "image_format" in data:
+        image_format = data["image_format"]
+
+    image_data = None
     if layout == "spring":
-        svg = sl.spring_layout(edge_list)
+        image_data = sl.spring_layout(edge_list, image_format)
     elif layout == "circular":
-        svg = sl.circular_layout(edge_list)
+        image_data = sl.circular_layout(edge_list, image_format)
     elif layout == "spiral":
-        svg = sl.spiral_layout(edge_list)
+        image_data = sl.spiral_layout(edge_list, image_format)
 
-    return Response(svg, mimetype="image/svg+xml")
+    if image_format == "svg":
+        return Response(image_data, mimetype="image/svg+xml")
+    else:
+        return Response(image_data, mimetype="image/png")
 
 
 @single_layer.route("/api/single-layer/community", methods=["POST"])
 def draw_communities():
+    """
+    Single Layer Network
+
+    swagger_from_file: specs/single_layer/communities.yml
+    """
 
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
@@ -67,13 +84,32 @@ def draw_communities():
     layout = data["layout"]
     edge_list = data["edge_list"]
     community_list = data["community_list"]
-    svg = None
+    image_format = "svg"
 
+    if "image_format" in data:
+        image_format = data["image_format"]
+
+    image_data = None
     if layout == "spring":
-        svg = slc.spring_layout_communities(edge_list, community_list)
+        image_data = slc.spring_layout_communities(
+            edge_list,
+            community_list,
+            image_format
+        )
     elif layout == "circular":
-        svg = slc.circular_layout_communities(edge_list, community_list)
+        image_data = slc.circular_layout_communities(
+            edge_list,
+            community_list,
+            image_format
+        )
     elif layout == "spiral":
-        svg = slc.spiral_layout_communities(edge_list, community_list)
+        image_data = slc.spiral_layout_communities(
+            edge_list,
+            community_list,
+            image_format
+        )
 
-    return Response(svg, mimetype="image/svg+xml")
+    if image_format == "svg":
+        return Response(image_data, mimetype="image/svg+xml")
+    else:
+        return Response(image_data, mimetype="image/png")
