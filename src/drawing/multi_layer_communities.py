@@ -1,7 +1,6 @@
 from converters.build_network import build_network
 from converters.build_communities import build_communities
-from converters.plt_to_str import plt_to_str
-from converters.plt_to_png import plt_to_png
+from converters import fig_to_png, fig_to_svg
 from py3plex.visualization.colors import colors_default
 from py3plex.visualization.multilayer import hairball_plot
 import matplotlib.pyplot as plt
@@ -28,11 +27,12 @@ def hairball_layout(edge_list, community_list, image_format):
     hairball_plot(
         network.core_network,
         color_list=colors,
+        node_size=25,
         scale_by_size=True,
         edge_width=0.5
     )
 
     if image_format == "svg":
-        return plt_to_str(plt)
+        return fig_to_svg(fig)
     else:
-        return plt_to_png(fig)
+        return fig_to_png(fig)
