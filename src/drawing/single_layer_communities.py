@@ -1,16 +1,18 @@
+from typing import List
+from models import ActorToCommunity
 from networkx.readwrite.edgelist import read_edgelist
-from converters.build_communities import build_communities
-from converters.build_network import build_network_single_layer
-from converters import fig_to_png
+from converters import fig_to_png, fig_to_svg, convert_community_list, edge_list_to_single_layer
 from drawing.drawing_constants import edge_color, node_color
 import networkx as nx
 import matplotlib.pyplot as plt
 
 
 def spring_layout_communities(edge_list, community_list, image_format="svg"):
-    G = build_network_single_layer(edge_list)
-    ATC, C = build_communities(community_list)
-    node_colors = _get_node_color(G, ATC)
+    G, g_actors, layers = edge_list_to_single_layer(edge_list)
+    actor_to_community, actors, communities = convert_community_list(
+        community_list
+    )
+    node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
@@ -23,9 +25,11 @@ def spring_layout_communities(edge_list, community_list, image_format="svg"):
 
 
 def circular_layout_communities(edge_list, community_list, image_format="svg"):
-    G = build_network_single_layer(edge_list)
-    ATC, C = build_communities(community_list)
-    node_colors = _get_node_color(G, ATC)
+    G, g_actors, layers = edge_list_to_single_layer(edge_list)
+    actor_to_community, actors, communities = convert_community_list(
+        community_list
+    )
+    node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
@@ -39,9 +43,11 @@ def circular_layout_communities(edge_list, community_list, image_format="svg"):
 
 
 def spiral_layout_communities(edge_list, community_list, image_format="svg"):
-    G = build_network_single_layer(edge_list)
-    ATC, C = build_communities(community_list)
-    node_colors = _get_node_color(G, ATC)
+    G, g_actors, layers = edge_list_to_single_layer(edge_list)
+    actor_to_community, actors, communities = convert_community_list(
+        community_list
+    )
+    node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
@@ -67,9 +73,10 @@ def _get_node_size(G):
     return [deg[1] * min_size for deg in degrees]
 
 
-def _get_node_color(G, ATC):
+def _get_node_color(G, atc: List[ActorToCommunity]):
+    act_dict = dict((pair.actor, pair.community) for pair in atc)
     colors = list()
     for n in G.nodes():
-        c = int(ATC[n])
+        c = int(act_dict[n])
         colors.append(c)
     return colors

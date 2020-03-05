@@ -1,12 +1,12 @@
 from py3plex.visualization.colors import all_color_names, colors_default
 from converters.build_network import build_network
 from converters.build_communities import build_communities
-from converters import fig_to_png, fig_to_svg
+from converters import fig_to_png, fig_to_svg, edge_list_to_multi_layer
 import matplotlib.pyplot as plt
 
 
 def diagonal_layout(edge_list, image_format="svg"):
-    network = build_network(edge_list)
+    network, actors, layers = edge_list_to_multi_layer(edge_list)
 
     plt.cla()
 

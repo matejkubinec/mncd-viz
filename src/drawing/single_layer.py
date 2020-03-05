@@ -1,13 +1,12 @@
 from networkx.readwrite.edgelist import read_edgelist
-from converters.build_network import build_network_single_layer
-from converters import fig_to_png, fig_to_svg
+from converters import fig_to_png, fig_to_svg, edge_list_to_single_layer
 from drawing.drawing_constants import edge_color, node_color
 import matplotlib.pyplot as plt
 import networkx as nx
 
 
 def spring_layout(edge_list, image_format):
-    G = build_network_single_layer(edge_list)
+    G, actors, layers = edge_list_to_single_layer(edge_list)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
@@ -20,7 +19,7 @@ def spring_layout(edge_list, image_format):
 
 
 def circular_layout(edge_list, image_format):
-    G = build_network_single_layer(edge_list)
+    G, actors, layers = edge_list_to_single_layer(edge_list)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
@@ -34,7 +33,7 @@ def circular_layout(edge_list, image_format):
 
 
 def spiral_layout(edge_list, image_format):
-    G = build_network_single_layer(edge_list)
+    G, actors, layers = edge_list_to_single_layer(edge_list)
     node_sizes = _get_node_size(G)
     fig, ax = plt.subplots()
     nx.draw(
