@@ -24,6 +24,8 @@ def build_network_single_layer(edgelist):
 
         if len(values) == 3:
             edges.append(tuple(values))
+        elif len(values) == 2:
+            edges.append(tuple(values))
         else:
             edges.append(tuple([values[0], values[2]]))
 

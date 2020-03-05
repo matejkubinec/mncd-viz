@@ -1,19 +1,17 @@
 from converters.build_communities import build_communities
 from drawing.drawing_constants import node_color
-from converters.plt_to_str import plt_to_str
-from converters.plt_to_png import plt_to_png
+from converters import fig_to_png, fig_to_svg
 from matplotlib import cm
 import matplotlib.pyplot as plt
 
 
-def draw_barplot(X, Y, labels, xlabel, ylabel, image_format):
+def draw_barplot(X, Y, labels, xlabel, ylabel, image_format="svg"):
+    plt.cla()
     fig, ax = plt.subplots()
 
-    plt.cla()
-
     ax.set_xticklabels([""] + labels)
-    ax.set_xlabel(xlabel)
 
+    ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
 
     ax.bar(
@@ -24,6 +22,6 @@ def draw_barplot(X, Y, labels, xlabel, ylabel, image_format):
     )
 
     if image_format == "svg":
-        return plt_to_str(fig)
+        return fig_to_svg(fig)
     else:
-        return plt_to_png(fig)
+        return fig_to_png(fig)

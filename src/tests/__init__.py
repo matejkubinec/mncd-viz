@@ -1,0 +1,3 @@
+from .parsers.edge_list_parser_tests import EdgeListParserTests
+from .parsers.community_list_parser_tests import CommunityListParserTests
+from .converters.edge_list_conversions_tests import EdgeListConversionsTests

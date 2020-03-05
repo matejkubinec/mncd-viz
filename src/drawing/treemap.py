@@ -1,6 +1,5 @@
 from converters.build_communities import build_communities
-from converters.plt_to_str import plt_to_str
-from converters.plt_to_png import plt_to_png
+from converters import fig_to_png, fig_to_svg
 from matplotlib.colors import Normalize
 from matplotlib.cm import Blues
 import matplotlib.pyplot as plt
@@ -25,6 +24,6 @@ def draw_treemap(sizes, label, image_format):
     )
 
     if image_format == "svg":
-        return plt_to_str(fig)
+        return fig_to_svg(fig)
     else:
-        return plt_to_png(fig)
+        return fig_to_png(fig)
