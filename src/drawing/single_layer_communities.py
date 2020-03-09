@@ -21,7 +21,10 @@ def spring_layout_communities(edge_list, community_list, image_format="svg"):
         ax=ax,
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_colors
+        node_color=node_colors,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
@@ -41,7 +44,10 @@ def circular_layout_communities(edge_list, community_list, image_format="svg"):
         pos=nx.circular_layout(G),
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_colors
+        node_color=node_colors,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
@@ -61,7 +67,10 @@ def spiral_layout_communities(edge_list, community_list, image_format="svg"):
         pos=nx.spiral_layout(G),
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_colors
+        node_color=node_colors,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
@@ -89,5 +98,6 @@ def _get_node_color(G, atc: List[ActorToCommunity]):
             c = int(act_dict[n])
             colors.append(palette[c])
         else:
-            colors.append(palette[-1])
+            # black
+            colors.append((0.0, 0.0, 0.0, 1.0))
     return colors

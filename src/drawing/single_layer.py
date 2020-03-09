@@ -15,7 +15,10 @@ def spring_layout(edge_list, image_format):
         ax=ax,
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_color
+        node_color=node_color,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
@@ -31,7 +34,10 @@ def circular_layout(edge_list, image_format):
         pos=nx.circular_layout(G),
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_color
+        node_color=node_color,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
@@ -47,7 +53,10 @@ def spiral_layout(edge_list, image_format):
         pos=nx.spiral_layout(G),
         edge_color=edge_color,
         node_size=node_sizes,
-        node_color=node_color
+        node_color=node_color,
+        with_labels=True,
+        font_size=9,
+        font_family="serif"
     )
     return _get_image(fig, image_format)
 
