@@ -3,35 +3,46 @@ from converters.build_network import build_network
 from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg, edge_list_to_multi_layer
 from drawing.drawing_constants import node_size
+from threading import Lock
 import matplotlib.pyplot as plt
 
+class MultiLayerDiagonal():
 
-def diagonal_layout(edge_list, image_format="svg"):
-    network, actors, layers = edge_list_to_multi_layer(edge_list)
+    def __init__(self, lock: Lock):
+        self.lock = lock
 
-    plt.cla()
+    def diagonal_layout(self, edge_list, image_format="svg"):
+        network, actors, layers = edge_list_to_multi_layer(edge_list)
 
-    parameters_layers = {
-        "node_size": node_size,
-        "scale_by_size": True,
-        "alphalevel": 0.1
-    }
+        parameters_layers = {
+            "node_size": 10,
+            "alphalevel": 0.1
+        }
 
-    if len(layers) > 0:
-        labels = [l.name for l in layers]
-        parameters_layers["labels"] = labels
+        if len(layers) > 0:
+            labels = [l.name for l in layers]
+            parameters_layers["labels"] = labels
 
-    parameters_multiedges = {
-        "alphachannel": 0.5
-    }
+        parameters_multiedges = {
+            "alphachannel": 0.5
+        }
+        
+        self.lock.acquire()
 
-    network.visualize_network(
-        style="diagonal",
-        parameters_multiedges=parameters_multiedges,
-        parameters_layers=parameters_layers
-    )
+        plt.cla()
+        fig = plt.gcf()
+        network.visualize_network(
+            style="diagonal",
+            parameters_multiedges=parameters_multiedges,
+            parameters_layers=parameters_layers
+        )
 
-    if image_format == "svg":
-        return fig_to_svg(plt.gcf())
-    else:
-        return fig_to_png(plt.gcf())
+        image_data = None
+        if image_format == "svg":
+            image_data = fig_to_svg(fig)
+        else:
+            image_data = fig_to_png(fig)
+
+        self.lock.release()
+
+        return image_data

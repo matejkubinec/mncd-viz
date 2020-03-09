@@ -1,9 +1,13 @@
 from flask import Blueprint, Response, jsonify, request
-from drawing.multi_layer import diagonal_layout
-from drawing.multi_layer_communities import hairball_layout
+from drawing.multi_layer import MultiLayerDiagonal
+from drawing.multi_layer_communities import MultiLayerHairball
+import threading
 import json
 
 multi_layer = Blueprint("multi_layer", __name__)
+multi_layer_lock = threading.Lock()
+multi_layer_diagonal = MultiLayerDiagonal(multi_layer_lock)
+multi_layer_hairball = MultiLayerHairball(multi_layer_lock)
 
 
 @multi_layer.route("/api/multi-layer/diagonal", methods=["POST"])
@@ -39,7 +43,7 @@ def draw_diagonal():
     if "image_format" in data:
         image_format = data["image_format"]
 
-    image_data = diagonal_layout(edge_list, image_format)
+    image_data = multi_layer_diagonal.diagonal_layout(edge_list, image_format)
 
     if image_format == "svg":
         return Response(image_data, mimetype="image/svg+xml")
@@ -81,7 +85,7 @@ def draw_hairball():
     if "image_format" in data:
         image_format = data["image_format"]
 
-    image_data = hairball_layout(edge_list, community_list, image_format)
+    image_data = multi_layer_hairball.hairball_layout(edge_list, community_list, image_format)
 
     if image_format == "svg":
         return Response(image_data, mimetype="image/svg+xml")

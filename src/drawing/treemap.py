@@ -2,7 +2,7 @@ from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg
 from matplotlib.colors import Normalize
 from matplotlib.cm import Blues
-import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 import squarify
 
 
@@ -13,7 +13,8 @@ def draw_treemap(sizes, label, image_format):
     norm = Normalize(vmin=mini, vmax=maxi)
     colors = [cmap(norm(value)) for value in sizes]
 
-    fig, ax = plt.subplots()
+    fig = Figure()
+    ax = fig.add_subplot(1, 1, 1)
 
     squarify.plot(
         ax=ax,
