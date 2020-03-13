@@ -38,12 +38,13 @@ def barplot():
     labels = data["labels"]
     xlabel = data["xlabel"]
     ylabel = data["ylabel"]
+    params = data.get("params", {})
     image_format = "svg"
 
     if "image_format" in data:
         image_format = data["image_format"]
 
-    img_data = draw_barplot(X, Y, labels, xlabel, ylabel, image_format)
+    img_data = draw_barplot(X, Y, labels, xlabel, ylabel, image_format, params)
 
     if image_format == "svg":
         return Response(img_data, mimetype="image/svg+xml")

@@ -38,6 +38,10 @@ parameters:
           description: Image format
           type: string
           example: png
+        params:
+          description: Additional parameters
+          type: object
+          example: { "color_communities": true }
 responses:
   200:
     description: Barplot Image
