@@ -1,12 +1,12 @@
 from converters.build_communities import build_communities
-from drawing.drawing_constants import node_color, get_palette
+from drawing.drawing_constants import node_color, get_palette, figsize, dpi
 from converters import fig_to_png, fig_to_svg
 from matplotlib.figure import Figure
 from matplotlib import cm
 
 
 def draw_barplot(X, Y, labels, xlabel, ylabel, image_format="svg", params={}):
-    fig = Figure()
+    fig = _get_figure()
     ax = fig.add_subplot(1, 1, 1)
 
     color = _get_node_color(X, params)
@@ -25,6 +25,10 @@ def draw_barplot(X, Y, labels, xlabel, ylabel, image_format="svg", params={}):
         return fig_to_svg(fig)
     else:
         return fig_to_png(fig)
+
+
+def _get_figure():
+    return Figure(figsize=figsize, dpi=dpi)
 
 
 def _get_node_color(X, params):

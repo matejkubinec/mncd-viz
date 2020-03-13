@@ -2,7 +2,7 @@ from typing import List
 from models import ActorToCommunity
 from networkx.readwrite.edgelist import read_edgelist
 from converters import fig_to_png, fig_to_svg, convert_community_list, edge_list_to_single_layer
-from drawing.drawing_constants import edge_color, node_color, get_palette
+from drawing.drawing_constants import edge_color, node_color, get_palette, figsize, dpi
 from matplotlib.figure import Figure
 import networkx as nx
 
@@ -14,7 +14,7 @@ def spring_layout_communities(edge_list, community_list, image_format="svg"):
     )
     node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
-    fig = Figure()
+    fig = _get_figure()
     ax = fig.add_subplot(1, 1, 1)
     nx.draw(
         G,
@@ -36,7 +36,7 @@ def circular_layout_communities(edge_list, community_list, image_format="svg"):
     )
     node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
-    fig = Figure()
+    fig = _get_figure()
     ax = fig.add_subplot(1, 1, 1)
     nx.draw(
         G,
@@ -59,7 +59,7 @@ def spiral_layout_communities(edge_list, community_list, image_format="svg"):
     )
     node_colors = _get_node_color(G, actor_to_community)
     node_sizes = _get_node_size(G)
-    fig = Figure()
+    fig = _get_figure()
     ax = fig.add_subplot(1, 1, 1)
     nx.draw(
         G,
@@ -73,6 +73,10 @@ def spiral_layout_communities(edge_list, community_list, image_format="svg"):
         font_family="serif"
     )
     return _get_image(fig, image_format)
+
+
+def _get_figure():
+    return Figure(figsize=figsize, dpi=dpi)
 
 
 def _get_image(fig, image_format):

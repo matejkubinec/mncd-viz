@@ -1,5 +1,6 @@
 from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg
+from drawing.drawing_constants import figsize, dpi
 from matplotlib.colors import Normalize
 from matplotlib.cm import Blues
 from matplotlib.figure import Figure
@@ -13,7 +14,7 @@ def draw_treemap(sizes, label, image_format):
     norm = Normalize(vmin=mini, vmax=maxi)
     colors = [cmap(norm(value)) for value in sizes]
 
-    fig = Figure()
+    fig = _get_figure()
     ax = fig.add_subplot(1, 1, 1)
 
     squarify.plot(
@@ -28,3 +29,7 @@ def draw_treemap(sizes, label, image_format):
         return fig_to_svg(fig)
     else:
         return fig_to_png(fig)
+
+
+def _get_figure():
+    return Figure(figsize=figsize, dpi=dpi)

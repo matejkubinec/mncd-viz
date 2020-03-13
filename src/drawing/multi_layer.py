@@ -2,9 +2,11 @@ from py3plex.visualization.colors import all_color_names, colors_default
 from converters.build_network import build_network
 from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg, edge_list_to_multi_layer
-from drawing.drawing_constants import node_size
-from threading import Lock
+from drawing.drawing_constants import node_size, figsize, dpi
+from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+from threading import Lock
+
 
 class MultiLayerDiagonal():
 
@@ -26,11 +28,13 @@ class MultiLayerDiagonal():
         parameters_multiedges = {
             "alphachannel": 0.5
         }
-        
+
         self.lock.acquire()
 
         plt.cla()
-        fig = plt.gcf()
+        fig: Figure = plt.gcf()
+        fig.set_dpi(dpi)
+        fig.set_size_inches(figsize)
         network.visualize_network(
             style="diagonal",
             parameters_multiedges=parameters_multiedges,

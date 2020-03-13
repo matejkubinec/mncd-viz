@@ -6,9 +6,10 @@ from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg, edge_list_to_multi_layer, convert_community_list
 from py3plex.visualization.colors import colors_default
 from py3plex.visualization.multilayer import hairball_plot
-from drawing.drawing_constants import node_size, get_palette
+from drawing.drawing_constants import node_size, get_palette, figsize, dpi
 from threading import Lock
 import matplotlib.pyplot as plt
+
 
 class MultiLayerHairball():
 
@@ -26,6 +27,8 @@ class MultiLayerHairball():
 
         plt.cla()
         fig = plt.gcf()
+        fig.set_dpi(dpi)
+        fig.set_size_inches(figsize)
         hairball_plot(
             network.core_network,
             color_list=colors,
@@ -39,11 +42,10 @@ class MultiLayerHairball():
             image_data = fig_to_svg(fig)
         else:
             image_data = fig_to_png(fig)
-        
-        self.lock.release()
-        
-        return image_data
 
+        self.lock.release()
+
+        return image_data
 
     def _get_colors(self, network: multi_layer_network, atc: List[ActorToCommunity]):
         colors_count = len(set(i.community for i in atc)) + 1
