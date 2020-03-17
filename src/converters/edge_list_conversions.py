@@ -33,4 +33,11 @@ def edge_list_to_single_layer(edge_list: str) -> (nx.Graph, List[Actor], List[La
 
     G.add_edges_from(edges_to_add)
 
+    if len(actors) > 0 and len(actors) != len(G.nodes()):
+        actors_set = set(a.index for a in actors)
+        nodes_set = set(G.nodes())
+
+        nodes_to_add = actors_set.difference(nodes_set)
+        G.add_nodes_from(nodes_to_add)
+
     return G, actors, layers
