@@ -8,12 +8,14 @@ import json
 import os
 
 app = Flask(__name__)
-app.config["APPINSIGHTS_INSTRUMENTATIONKEY"] = os.environ["APPINSIGHTS_INSTRUMENTATIONKEY"]
+APPINSIGHTS_KEY = os.environ.get("APPINSIGHTS_INSTRUMENTATIONKEY")
+app.config["APPINSIGHTS_INSTRUMENTATIONKEY"] = APPINSIGHTS_KEY
 app.register_blueprint(single_layer)
 app.register_blueprint(multi_layer)
 app.register_blueprint(common_charts)
 
 appinsights = AppInsights(app)
+
 
 @app.route("/spec")
 def spec():

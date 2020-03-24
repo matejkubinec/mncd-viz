@@ -32,3 +32,12 @@ def build_network_single_layer(edgelist):
     G.add_edges_from(edges)
 
     return G
+
+
+def build_network(edges, actors):
+    G = nx.Graph()
+
+    for e in edges:
+        G.add_edge(e.actor_from, e.actor_to, weight=e.weight)
+
+    return G
