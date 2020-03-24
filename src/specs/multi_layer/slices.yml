@@ -1,0 +1,23 @@
+Multi Layer Slices
+---
+tags:
+  - Multi Layer
+parameters:
+  - in: body
+    name: body
+    schema:
+      id: multi_layer_slices
+      properties:
+        edge_list:
+          description: Edge List with our without metadata
+          type: string
+          example: "0 0 1 0 1\n0 1 1 1 1\n0 0 1 1 1\n# Actors\n0 Actor0\n1 Actor1\n# Layers\n0 Layer0\n1 Layer1"
+        image_format:
+          type: string
+          example: png
+responses:
+  200:
+    description: Multi Layer Slices
+    content:
+      - image/svg+xml
+      - image/png

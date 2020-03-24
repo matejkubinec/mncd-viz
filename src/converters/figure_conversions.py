@@ -5,7 +5,7 @@ from drawing.drawing_constants import dpi
 
 def fig_to_png(fig):
     image_data = BytesIO()
-    fig.savefig(image_data, format="png", dpi=dpi)
+    fig.savefig(image_data, format="png", dpi=dpi, transparent=True)
     image_data.seek(0)
     del fig
     return image_data.getvalue()
@@ -13,7 +13,7 @@ def fig_to_png(fig):
 
 def fig_to_svg(fig):
     image_data = StringIO()
-    fig.savefig(image_data, format="svg", dpi=dpi)
+    fig.savefig(image_data, format="svg", dpi=dpi, transparent=True)
     image_data.seek(0)
     del fig
     return image_data.read()
