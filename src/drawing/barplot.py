@@ -11,13 +11,13 @@ def draw_barplot(X, Y, labels, xlabel, ylabel, image_format="svg", params={}):
 
     color = _get_node_color(X, params)
 
-    ax.set_xticklabels([""] + labels)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.bar(
         X,
         Y,
         align="center",
+        tick_label=labels,
         color=color
     )
 
@@ -37,5 +37,5 @@ def _get_node_color(X, params):
         return node_color
     elif params["color_communities"]:
         community_count = len(X)
-        palette = get_palette(community_count)
+        palette = get_palette(community_count + 1)
         return [palette[i] for i in range(community_count)]
