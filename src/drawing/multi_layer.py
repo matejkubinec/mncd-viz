@@ -64,6 +64,13 @@ class MultiLayerLayouts():
         axes = self._get_axes(fig, layers)
         palette = self._get_palette(layers)
 
+        if len(layers) > 2 and len(layers) % 2 == 1:
+            r = int((len(layers) - 1) / 2)
+            c = int(len(layers) % 2)
+            axes[r, c].axis("off")
+        else:
+            axes[1].axis("off")
+
         for i, l in enumerate(layers):
             layer_edges = filter(lambda e: self._filter_edges(e, l), edges)
             r = int(i / 2)
