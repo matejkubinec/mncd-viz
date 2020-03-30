@@ -68,7 +68,7 @@ class MultiLayerLayouts():
             r = int((len(layers) - 1) / 2)
             c = int(len(layers) % 2)
             axes[r, c].axis("off")
-        else:
+        elif len(layers) == 1:
             axes[1].axis("off")
 
         for i, l in enumerate(layers):
