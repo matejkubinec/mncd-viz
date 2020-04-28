@@ -4,6 +4,7 @@ from flask_swagger import swagger
 from controllers.single_layer_controller import single_layer
 from controllers.multi_layer_controller import multi_layer
 from controllers.common_charts_controller import common_charts
+import logging
 import json
 import os
 
@@ -15,6 +16,15 @@ app.register_blueprint(multi_layer)
 app.register_blueprint(common_charts)
 
 appinsights = AppInsights(app)
+
+streamHandler = logging.StreamHandler()
+app.logger.addHandler(streamHandler)
+
+
+@app.after_request
+def after_request(response):
+    appinsights.flush()
+    return response
 
 
 @app.route("/spec")
@@ -33,4 +43,5 @@ def docs(path):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(filename='error.log', level=logging.DEBUG)
     app.run(host='0.0.0.0')
