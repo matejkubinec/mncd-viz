@@ -6,7 +6,7 @@ from converters.build_communities import build_communities
 from converters import fig_to_png, fig_to_svg, edge_list_to_multi_layer, convert_community_list
 from py3plex.visualization.colors import colors_default
 from py3plex.visualization.multilayer import hairball_plot
-from drawing.drawing_constants import node_size, get_palette, figsize, dpi
+from drawing.drawing_constants import node_size, get_palette, figsize, dpi, black
 from parsers import EdgeListParser, CommunityListParser
 from matplotlib.figure import Figure
 from threading import Lock
@@ -120,7 +120,7 @@ class MultiLayerCommunitiesLayouts():
 
     def _layer_colors(self, palette, act, nodes):
         act_dict = dict((ac.actor, ac.community) for ac in act)
-        return [palette[act_dict[n]] for n in nodes]
+        return [palette[act_dict[n]] if n in act_dict else black for n in nodes]
 
     def _filter_edges(self, edge, layer):
         return edge.layer_from == layer.index and edge.layer_to == layer.index

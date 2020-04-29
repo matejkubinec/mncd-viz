@@ -2,7 +2,7 @@ from typing import List
 from models import ActorToCommunity
 from networkx.readwrite.edgelist import read_edgelist
 from converters import fig_to_png, fig_to_svg, convert_community_list, edge_list_to_single_layer
-from drawing.drawing_constants import edge_color, node_color, get_palette, figsize, dpi
+from drawing.drawing_constants import edge_color, node_color, get_palette, figsize, dpi, black
 from matplotlib.figure import Figure
 import networkx as nx
 
@@ -102,6 +102,5 @@ def _get_node_color(G, atc: List[ActorToCommunity]):
             c = int(act_dict[n])
             colors.append(palette[c])
         else:
-            # black
-            colors.append((0.0, 0.0, 0.0, 1.0))
+            colors.append(black)
     return colors

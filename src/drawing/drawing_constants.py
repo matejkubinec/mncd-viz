@@ -8,6 +8,7 @@ def get_palette(colors_count):
 
 edge_color = "#c4c4c4"
 node_color = "#02aff9"
+black = (0.0, 0.0, 0.0, 1.0)
 node_size = 10
 
 figsize = (8, 8)
