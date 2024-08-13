@@ -1,3 +1,8 @@
+import numpy as np
+
+np.float_ = np.float64
+np.Inf = np.inf
+
 from applicationinsights.flask.ext import AppInsights
 from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_swagger import swagger

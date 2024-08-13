@@ -18,6 +18,8 @@ def draw_diagonal():
     swagger_from_file: specs/multi_layer/diagonal.yml
     """
 
+    return Response(status=501)
+
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
         return Response(jsonify(response), status=402)
@@ -58,6 +60,8 @@ def draw_hairball():
 
     swagger_from_file: specs/multi_layer/hairball.yml
     """
+
+    return Response(status=501)
 
     if request.data is None:
         response = {"errors": ["Data cannot be none."]}
