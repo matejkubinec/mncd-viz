@@ -6,6 +6,7 @@ This application exposed as a web api is used for different visualizations used 
 
 To run the app on port 5050 use:
 
-```
-flask run -h localhost -p 5050
+```sh
+cd src
+flask run -p 5050
 ```
