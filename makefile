@@ -8,3 +8,6 @@ run:
 
 image:
 	docker build -t matejkubinec/mncd-viz .
+
+venv:
+	python3 -m venv .venv
