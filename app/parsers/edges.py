@@ -1,13 +1,11 @@
-from typing import List
-
 from app.models import Actor, Edge, Layer
 
 
-def parse_edge_list(edge_list: str) -> tuple[List[Edge], List[Actor], List[Layer]]:
+def parse_edge_list(edge_list: str) -> tuple[list[Edge], list[Actor], list[Layer]]:
     lines = edge_list.split("\n")
-    edges: List[Edge] = []
-    actors: List[Actor] = []
-    layers: List[Layer] = []
+    edges: list[Edge] = []
+    actors: list[Actor] = []
+    layers: list[Layer] = []
 
     reading = "edges"
     for line in lines:

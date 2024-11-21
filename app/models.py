@@ -1,7 +1,8 @@
 from enum import Enum
+import json
 from typing import List, NamedTuple
 from pydantic import BaseModel, field_validator, ValidationInfo, model_validator
-from fastapi import Response
+from fastapi import Response, status
 from matplotlib.figure import Figure
 from app import figure
 
@@ -44,6 +45,16 @@ class Edge(NamedTuple):
         ]
 
 
+class ActorToCommunity(NamedTuple):
+    actor: int
+    community: int
+
+
+class Community(NamedTuple):
+    index: int
+    name: str
+
+
 class FigureResponse(Response):
     def __init__(self, fig: Figure, format: ImageFormat):
         if format == ImageFormat.svg:
@@ -70,6 +81,8 @@ class BarplotBody(BaseModel):
         if len(self.x) != len(self.labels):
             raise ValueError("length of 'labels' must match length of 'x'")
 
+        return self
+
 
 class TreemapBody(BaseModel):
     image_format: ImageFormat = ImageFormat.svg
@@ -80,6 +93,7 @@ class TreemapBody(BaseModel):
     def verify_lengths(self):
         if len(self.sizes) != len(self.label):
             raise ValueError("sizes length must match label length")
+        return self
 
     @field_validator("sizes")
     def validate_sizes_total(cls, sizes: List[int], info: ValidationInfo):
@@ -99,3 +113,22 @@ class SingleLayerCommunityBody(BaseModel):
     layout: Layout = Layout.circular
     edge_list: str
     community_list: str
+
+
+class MultiLayerSlicesBody(BaseModel):
+    image_format: ImageFormat = ImageFormat.svg
+    edge_list: str
+
+
+class MultiLayerCommunitySlicesBody(BaseModel):
+    image_format: ImageFormat = ImageFormat.svg
+    edge_list: str
+    community_list: str
+
+
+class NotImplementedResponse(Response):
+    def __init__(self, message: str):
+        super().__init__(
+            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+            content=message,
+        )

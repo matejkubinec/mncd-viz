@@ -2,7 +2,7 @@ from typing import List
 import networkx as nx
 
 from app.models import Actor, Layer
-from app.parsers.edge_list import parse_edge_list
+from app.parsers.edges import parse_edge_list
 
 
 def to_single_layer(
