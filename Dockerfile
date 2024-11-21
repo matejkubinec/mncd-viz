@@ -4,8 +4,8 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY src .
+COPY app app
 
 EXPOSE 5050
 
-CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5050"]
+CMD ["fastapi", "run", "--app", "app", "--host", "0.0.0.0", "--port", "5050"]
