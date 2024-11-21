@@ -15,6 +15,8 @@ def network(body: SingleLayerNetworkBody):
 @router.post("/community")
 def community(body: SingleLayerCommunityBody):
     fig = single_layer_community.draw_communities(
-        body.edge_list, body.community_list, body.layout
+        body.edge_list,
+        body.community_list,
+        body.layout,
     )
     return FigureResponse(fig, body.image_format)

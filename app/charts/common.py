@@ -7,7 +7,11 @@ import squarify
 
 
 def draw_barplot(
-    labels: List[str], x: List[int], xlabel: str, y: List[int], ylabel: str
+    labels: List[str],
+    x: List[int],
+    xlabel: str,
+    y: List[int],
+    ylabel: str,
 ) -> Figure:
     fig = Figure(figsize=constants.figsize, dpi=constants.dpi)
     ax = fig.add_subplot(1, 1, 1)
@@ -19,7 +23,10 @@ def draw_barplot(
     return fig
 
 
-def draw_treemap(label: List[str], sizes: List[int]) -> Figure:
+def draw_treemap(
+    label: List[str],
+    sizes: List[int],
+) -> Figure:
     norm = Normalize(vmin=min(sizes), vmax=max(sizes))
     colors = [Blues(norm(value)) for value in sizes]
     fig = Figure(figsize=constants.figsize, dpi=constants.dpi)

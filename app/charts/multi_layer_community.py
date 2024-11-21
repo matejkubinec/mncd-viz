@@ -26,12 +26,7 @@ def draw_slices_with_communities(edge_list: str, community_list: str):
         r = int(i / 2)
         c = int(i % 2)
 
-        ax = None
-        if len(layers) > 2:
-            ax = axes[r, c]
-        else:
-            ax = axes[c]
-
+        ax = axes[r, c] if len(layers) > 2 else axes[c]
         ax.set_title(l.name)
 
         graph = graph_utils.build_graph(layer_edges)
