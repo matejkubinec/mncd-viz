@@ -61,3 +61,7 @@ Run the following command to build the docker image:
 ```sh
 make image
 ```
+
+## License
+
+Licensed under [MIT](./license.txt)
