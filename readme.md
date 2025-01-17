@@ -41,6 +41,8 @@ services:
 
 ## Development
 
+To setup the development environment use the following commands:
+
 ```sh
 # 1. Create virtual environment
 make venv
