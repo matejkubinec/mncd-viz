@@ -9,6 +9,6 @@ app.include_router(single_layer.router)
 app.include_router(multi_layer.router)
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 async def root():
     return RedirectResponse("/docs", status_code=status.HTTP_302_FOUND)

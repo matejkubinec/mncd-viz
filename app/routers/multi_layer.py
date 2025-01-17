@@ -11,12 +11,12 @@ from app.models import (
 router = APIRouter(prefix="/api/multi-layer", tags=["multi-layer"])
 
 
-@router.post("/diagonal")
+@router.post("/diagonal", include_in_schema=False)
 def diagonal():
     return NotImplementedResponse("Multi-layer diagonal chart is not implemented yet.")
 
 
-@router.post("/hairball")
+@router.post("/hairball", include_in_schema=False)
 def hairball():
     return NotImplementedResponse("Multi-layer hairball chart is not implemented yet.")
 
