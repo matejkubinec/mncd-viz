@@ -8,8 +8,12 @@ run:
 	fastapi run app
 
 .PHONY: image
-image:
+docker-image:
 	docker build -t matejkubinec/mncd-viz .
+
+.PHONY: docker-run
+docker-run: docker-image
+	docker run -p 5050:5050 --rm matejkubinec/mncd-viz
 
 .PHONY: activate
 activate:
